@@ -1,0 +1,275 @@
+/* RainbowKit Base Styles */
+:root {
+  --rk-fonts-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --rk-radii-actionButton: 9999px;
+  --rk-radii-connectButton: 12px;
+  --rk-radii-menuButton: 12px;
+  --rk-radii-modal: 24px;
+  --rk-radii-modalMobile: 28px;
+  --rk-colors-accentColor: #a855f7;
+  --rk-colors-accentColorForeground: #fff;
+  --rk-colors-actionButtonBorder: rgba(0, 0, 0, 0.1);
+  --rk-colors-actionButtonBorderMobile: rgba(0, 0, 0, 0.1);
+  --rk-colors-actionButtonSecondaryBackground: rgba(0, 0, 0, 0.1);
+  --rk-colors-closeButton: rgba(60, 66, 66, 0.8);
+  --rk-colors-closeButtonBackground: rgba(0, 0, 0, 0.1);
+  --rk-colors-connectButtonBackground: #fff;
+  --rk-colors-connectButtonBackgroundError: #ff494a;
+  --rk-colors-connectButtonInnerBackground: linear-gradient(0deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.06));
+  --rk-colors-connectButtonText: #25292e;
+  --rk-colors-connectButtonTextError: #fff;
+  --rk-colors-connectionIndicator: #30e000;
+  --rk-colors-error: #ff494a;
+  --rk-colors-generalBorder: rgba(0, 0, 0, 0.1);
+  --rk-colors-generalBorderDim: rgba(0, 0, 0, 0.05);
+  --rk-colors-menuItemBackground: rgba(60, 66, 66, 0.1);
+  --rk-colors-modalBackdrop: rgba(0, 0, 0, 0.5);
+  --rk-colors-modalBackground: #fff;
+  --rk-colors-modalBorder: transparent;
+  --rk-colors-modalText: #25292e;
+  --rk-colors-modalTextDim: rgba(60, 66, 66, 0.3);
+  --rk-colors-modalTextSecondary: rgba(60, 66, 66, 0.6);
+  --rk-colors-profileAction: #fff;
+  --rk-colors-profileActionHover: rgba(255, 255, 255, 0.8);
+  --rk-colors-profileForeground: rgba(60, 66, 66, 0.06);
+  --rk-colors-selectedOptionBorder: rgba(60, 66, 66, 0.1);
+  --rk-colors-standby: #ffd641;
+  --rk-shadows-connectButton: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  --rk-shadows-dialog: 0px 8px 32px rgba(0, 0, 0, 0.32);
+  --rk-shadows-profileDetailsAction: 0px 2px 6px rgba(37, 41, 46, 0.04);
+  --rk-shadows-selectedOption: 0px 2px 6px rgba(0, 0, 0, 0.24);
+  --rk-shadows-selectedWallet: 0px 2px 6px rgba(0, 0, 0, 0.12);
+  --rk-shadows-walletLogo: 0px 2px 16px rgba(0, 0, 0, 0.16);
+}
+
+/* Dark mode */
+.dark,
+[data-theme="dark"] {
+  --rk-colors-accentColor: #a855f7;
+  --rk-colors-accentColorForeground: #fff;
+  --rk-colors-actionButtonBorder: rgba(255, 255, 255, 0.1);
+  --rk-colors-actionButtonBorderMobile: rgba(255, 255, 255, 0.1);
+  --rk-colors-actionButtonSecondaryBackground: rgba(255, 255, 255, 0.1);
+  --rk-colors-closeButton: rgba(224, 232, 255, 0.8);
+  --rk-colors-closeButtonBackground: rgba(255, 255, 255, 0.1);
+  --rk-colors-connectButtonBackground: #1a1b1f;
+  --rk-colors-connectButtonBackgroundError: #ff494a;
+  --rk-colors-connectButtonInnerBackground: linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.12));
+  --rk-colors-connectButtonText: #fff;
+  --rk-colors-connectButtonTextError: #fff;
+  --rk-colors-connectionIndicator: #30e000;
+  --rk-colors-error: #ff494a;
+  --rk-colors-generalBorder: rgba(255, 255, 255, 0.1);
+  --rk-colors-generalBorderDim: rgba(255, 255, 255, 0.05);
+  --rk-colors-menuItemBackground: rgba(224, 232, 255, 0.1);
+  --rk-colors-modalBackdrop: rgba(0, 0, 0, 0.5);
+  --rk-colors-modalBackground: #1a1b1f;
+  --rk-colors-modalBorder: rgba(255, 255, 255, 0.1);
+  --rk-colors-modalText: #fff;
+  --rk-colors-modalTextDim: rgba(224, 232, 255, 0.3);
+  --rk-colors-modalTextSecondary: rgba(224, 232, 255, 0.6);
+  --rk-colors-profileAction: rgba(224, 232, 255, 0.1);
+  --rk-colors-profileActionHover: rgba(224, 232, 255, 0.2);
+  --rk-colors-profileForeground: rgba(224, 232, 255, 0.05);
+  --rk-colors-selectedOptionBorder: rgba(224, 232, 255, 0.1);
+  --rk-colors-standby: #ffd641;
+}
+
+/* RainbowKit Modal Styles */
+[data-rk] {
+  --rk-blurs-modalOverlay: blur(0px);
+  --rk-fonts-body: var(--rk-fonts-body);
+  --rk-radii-actionButton: var(--rk-radii-actionButton);
+  --rk-radii-connectButton: var(--rk-radii-connectButton);
+  --rk-radii-menuButton: var(--rk-radii-menuButton);
+  --rk-radii-modal: var(--rk-radii-modal);
+  --rk-radii-modalMobile: var(--rk-radii-modalMobile);
+  --rk-colors-accentColor: var(--rk-colors-accentColor);
+  --rk-colors-accentColorForeground: var(--rk-colors-accentColorForeground);
+  --rk-colors-actionButtonBorder: var(--rk-colors-actionButtonBorder);
+  --rk-colors-actionButtonBorderMobile: var(--rk-colors-actionButtonBorderMobile);
+  --rk-colors-actionButtonSecondaryBackground: var(--rk-colors-actionButtonSecondaryBackground);
+  --rk-colors-closeButton: var(--rk-colors-closeButton);
+  --rk-colors-closeButtonBackground: var(--rk-colors-closeButtonBackground);
+  --rk-colors-connectButtonBackground: var(--rk-colors-connectButtonBackground);
+  --rk-colors-connectButtonBackgroundError: var(--rk-colors-connectButtonBackgroundError);
+  --rk-colors-connectButtonInnerBackground: var(--rk-colors-connectButtonInnerBackground);
+  --rk-colors-connectButtonText: var(--rk-colors-connectButtonText);
+  --rk-colors-connectButtonTextError: var(--rk-colors-connectButtonTextError);
+  --rk-colors-connectionIndicator: var(--rk-colors-connectionIndicator);
+  --rk-colors-error: var(--rk-colors-error);
+  --rk-colors-generalBorder: var(--rk-colors-generalBorder);
+  --rk-colors-generalBorderDim: var(--rk-colors-generalBorderDim);
+  --rk-colors-menuItemBackground: var(--rk-colors-menuItemBackground);
+  --rk-colors-modalBackdrop: var(--rk-colors-modalBackdrop);
+  --rk-colors-modalBackground: var(--rk-colors-modalBackground);
+  --rk-colors-modalBorder: var(--rk-colors-modalBorder);
+  --rk-colors-modalText: var(--rk-colors-modalText);
+  --rk-colors-modalTextDim: var(--rk-colors-modalTextDim);
+  --rk-colors-modalTextSecondary: var(--rk-colors-modalTextSecondary);
+  --rk-colors-profileAction: var(--rk-colors-profileAction);
+  --rk-colors-profileActionHover: var(--rk-colors-profileActionHover);
+  --rk-colors-profileForeground: var(--rk-colors-profileForeground);
+  --rk-colors-selectedOptionBorder: var(--rk-colors-selectedOptionBorder);
+  --rk-colors-standby: var(--rk-colors-standby);
+  --rk-shadows-connectButton: var(--rk-shadows-connectButton);
+  --rk-shadows-dialog: var(--rk-shadows-dialog);
+  --rk-shadows-profileDetailsAction: var(--rk-shadows-profileDetailsAction);
+  --rk-shadows-selectedOption: var(--rk-shadows-selectedOption);
+  --rk-shadows-selectedWallet: var(--rk-shadows-selectedWallet);
+  --rk-shadows-walletLogo: var(--rk-shadows-walletLogo);
+  --rk-transitions-default: all 0.2s ease;
+}
+
+[data-rk] * {
+  font-family: var(--rk-fonts-body);
+}
+
+/* RainbowKit Modal Animation */
+[data-rk] [data-rk-modal-position="center"] {
+  animation: rk-slide-in 0.3s ease forwards;
+}
+
+@keyframes rk-slide-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* RainbowKit Connect Button Styles */
+[data-rk] [data-rk-connect-button] {
+  border-radius: var(--rk-radii-connectButton);
+  box-shadow: var(--rk-shadows-connectButton);
+  transition: var(--rk-transitions-default);
+}
+
+/* RainbowKit Modal Styles */
+[data-rk] [data-rk-modal] {
+  border-radius: var(--rk-radii-modal);
+  box-shadow: var(--rk-shadows-dialog);
+  border: 1px solid var(--rk-colors-modalBorder);
+  background: var(--rk-colors-modalBackground);
+  color: var(--rk-colors-modalText);
+}
+
+/* RainbowKit Wallet List Styles */
+[data-rk] [data-rk-wallet-option] {
+  transition: var(--rk-transitions-default);
+  border-radius: 12px;
+}
+
+[data-rk] [data-rk-wallet-option]:hover {
+  background: var(--rk-colors-profileForeground);
+}
+
+/* RainbowKit Chain Selector Styles */
+[data-rk] [data-rk-chain-option] {
+  transition: var(--rk-transitions-default);
+  border-radius: 12px;
+}
+
+[data-rk] [data-rk-chain-option]:hover {
+  background: var(--rk-colors-profileForeground);
+}
+
+/* Custom UIswap Theme */
+[data-rk] {
+  --rk-colors-accentColor: #a855f7;
+  --rk-colors-accentColorForeground: #ffffff;
+}
+
+.dark [data-rk] {
+  --rk-colors-accentColor: #a855f7;
+  --rk-colors-accentColorForeground: #ffffff;
+  --rk-colors-connectButtonBackground: #1e293b;
+  --rk-colors-connectButtonText: #ffffff;
+  --rk-colors-modalBackground: #0f172a;
+  --rk-colors-modalText: #ffffff;
+}
+
+/* Additional RainbowKit Component Styles */
+
+/* Connect Button */
+[data-rk] [data-rk-connect-button] {
+  font-weight: 600;
+}
+
+/* Account Button */
+[data-rk] [data-rk-account-button] {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Chain Selector */
+[data-rk] [data-rk-chain-button] {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modal Header */
+[data-rk] [data-rk-modal-header] {
+  padding: 16px;
+  border-bottom: 1px solid var(--rk-colors-generalBorder);
+}
+
+/* Modal Content */
+[data-rk] [data-rk-modal-content] {
+  padding: 16px;
+}
+
+/* Wallet Connect Button */
+[data-rk] [data-rk-wallet-connect-button] {
+  background: var(--rk-colors-accentColor);
+  color: var(--rk-colors-accentColorForeground);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+[data-rk] [data-rk-wallet-connect-button]:hover {
+  opacity: 0.9;
+}
+
+/* Balance Display */
+[data-rk] [data-rk-balance-display] {
+  font-weight: 600;
+}
+
+/* Network Selector */
+[data-rk] [data-rk-network-selector] {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Wallet Icons */
+[data-rk] [data-rk-wallet-icon] {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--rk-shadows-walletLogo);
+}
+
+/* Connection Status Indicator */
+[data-rk] [data-rk-connection-status] {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* RainbowKit Mobile Optimizations */
+@media (max-width: 768px) {
+  [data-rk] [data-rk-modal] {
+    width: 100%;
+    max-width: 100%;
+    border-radius: var(--rk-radii-modalMobile);
+  }
+
+  [data-rk] [data-rk-modal-content] {
+    padding: 12px;
+  }
+}
