@@ -1,32 +1,9 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode, useEffect } from "react"
+import { createContext, useContext, useState, type ReactNode } from "react"
 import { toast } from "@/components/ui/use-toast"
-import { useAccount, useSwitchChain, useConfig } from "wagmi"
-
-// Define wallet types with their icons and names
-export const walletTypes = [
-  {
-    id: "metamask",
-    name: "MetaMask",
-    icon: "/metamask-fox-logo.png",
-  },
-  {
-    id: "coinbase",
-    name: "Coinbase Wallet",
-    icon: "/abstract-crypto-wallet.png",
-  },
-  {
-    id: "rainbow",
-    name: "Rainbow",
-    icon: "/colorful-wallet-icon.png",
-  },
-  {
-    id: "trust",
-    name: "Trust Wallet",
-    icon: "/stylized-shield-logo.png",
-  },
-]
+import { useAccount, useChainId, useBalance, useConnect, useDisconnect, useSwitchChain } from "wagmi"
+import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains"
 
 // Define network types
 export const networks = [
@@ -35,24 +12,28 @@ export const networks = [
     name: "Ethereum",
     icon: "/ethereum-crystal.png",
     iconBackground: "#627EEA",
+    chainId: mainnet.id,
   },
   {
     id: "polygon",
     name: "Polygon",
     icon: "/polygon-abstract-network.png",
     iconBackground: "#8247E5",
+    chainId: polygon.id,
   },
   {
     id: "optimism",
     name: "Optimism",
     icon: "/optimistic-circuit.png",
     iconBackground: "#FF0420",
+    chainId: optimism.id,
   },
   {
     id: "arbitrum",
     name: "Arbitrum",
     icon: "/arbitrum-network-abstract.png",
     iconBackground: "#28A0F0",
+    chainId: arbitrum.id,
   },
 ]
 
@@ -61,7 +42,7 @@ interface WalletContextType {
   isConnected: boolean
   network: (typeof networks)[0]
   balance: string
-  connect: (walletType: string) => void
+  connect: (connectorId: string) => void
   disconnect: () => void
   switchNetwork: (networkId: string) => void
   openConnectModal: () => void
@@ -76,51 +57,39 @@ interface WalletContextType {
 const WalletContext = createContext<WalletContextType | undefined>(undefined)
 
 export function WalletProvider({ children }: { children: ReactNode }) {
-  const { address, isConnected, chain } = useAccount()
-  const { chains } = useConfig()
+  const { address, isConnected } = useAccount()
+  const chainId = useChainId()
+  const { data: balanceData } = useBalance({ address })
+  const { connect: wagmiConnect, connectors } = useConnect()
+  const { disconnect: wagmiDisconnect } = useDisconnect()
   const { switchChain } = useSwitchChain()
 
-  const [network, setNetwork] = useState(networks[0])
-  const [balance, setBalance] = useState("0.0")
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalView, setModalView] = useState<"connect" | "account" | "chain">("connect")
 
-  // Update network when chain changes
-  useEffect(() => {
-    if (chain) {
-      const chainNetwork = networks.find((n) => n.name.toLowerCase() === chain.name.toLowerCase()) || networks[0]
-      setNetwork(chainNetwork)
+  // Find current network
+  const currentNetwork = networks.find((n) => n.chainId === chainId) || networks[0]
+
+  const connect = (connectorId: string) => {
+    const connector = connectors.find((c) => c.id === connectorId || c.name.toLowerCase().includes(connectorId))
+
+    if (connector) {
+      wagmiConnect({ connector })
+      toast({
+        title: "Wallet Connected",
+        description: `Connected to ${connector.name} wallet`,
+      })
+    } else {
+      toast({
+        title: "Connection Error",
+        description: "Connector not found",
+        variant: "destructive",
+      })
     }
-  }, [chain])
-
-  // Generate a random balance when the network changes
-  useEffect(() => {
-    if (address) {
-      const randomBalance = (Math.random() * 10).toFixed(4)
-      setBalance(randomBalance)
-    }
-  }, [network, address])
-
-  const connect = (walletType: string) => {
-    // Mock wallet connection
-    const mockAddresses: Record<string, string> = {
-      metamask: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
-      coinbase: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-      rainbow: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      trust: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-    }
-
-    const selectedAddress = mockAddresses[walletType] || "0x1234567890123456789012345678901234567890"
-
-    // This is just for mock purposes - in reality, RainbowKit handles this
-    toast({
-      title: "Wallet Connected",
-      description: `Connected to ${walletType} wallet`,
-    })
   }
 
   const disconnect = () => {
-    // This is just for mock purposes - in reality, RainbowKit handles this
+    wagmiDisconnect()
     toast({
       title: "Wallet Disconnected",
       description: "Your wallet has been disconnected",
@@ -128,19 +97,15 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   }
 
   const switchNetwork = (networkId: string) => {
-    const newNetwork = networks.find((n) => n.id === networkId) || networks[0]
-    setNetwork(newNetwork)
+    const network = networks.find((n) => n.id === networkId)
 
-    // Find the corresponding chain in wagmi config
-    const targetChain = chains.find((c) => c.name.toLowerCase().includes(networkId))
-    if (targetChain) {
-      switchChain({ chainId: targetChain.id })
+    if (network) {
+      switchChain({ chainId: network.chainId })
+      toast({
+        title: "Network Changed",
+        description: `Switched to ${network.name}`,
+      })
     }
-
-    toast({
-      title: "Network Changed",
-      description: `Switched to ${newNetwork.name}`,
-    })
   }
 
   const openConnectModal = () => {
@@ -162,9 +127,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     <WalletContext.Provider
       value={{
         address: address || null,
-        isConnected: !!address,
-        network,
-        balance,
+        isConnected,
+        network: currentNetwork,
+        balance: balanceData?.formatted || "0",
         connect,
         disconnect,
         switchNetwork,

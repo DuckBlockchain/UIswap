@@ -1,16 +1,43 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { Wallet } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Wallet } from "lucide-react"
+import { useAccount, useChainId, useBalance } from "wagmi"
+import { WalletConnectionModal } from "./wallet-connection-modal"
+import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains"
 
 export function ConnectWalletButton() {
   const [mounted, setMounted] = useState(false)
+  const { address, isConnected } = useAccount()
+  const chainId = useChainId()
+  const { data: balanceData } = useBalance({ address })
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalView, setModalView] = useState<"connect" | "account" | "network">("connect")
+
+  // Get current chain info
+  const chains = [mainnet, polygon, optimism, arbitrum]
+  const currentChain = chains.find((chain) => chain.id === chainId) || mainnet
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const openConnectModal = () => {
+    setModalView("connect")
+    setIsModalOpen(true)
+  }
+
+  const openAccountModal = () => {
+    setModalView("account")
+    setIsModalOpen(true)
+  }
+
+  const openNetworkModal = () => {
+    setModalView("network")
+    setIsModalOpen(true)
+  }
 
   if (!mounted) {
     return (
@@ -21,80 +48,44 @@ export function ConnectWalletButton() {
     )
   }
 
+  if (!isConnected) {
+    return (
+      <>
+        <button
+          onClick={openConnectModal}
+          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-purple-500/20"
+        >
+          <Wallet className="h-5 w-5" />
+          <span className="font-medium">Connect Wallet</span>
+        </button>
+
+        <WalletConnectionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} view={modalView} />
+      </>
+    )
+  }
+
   return (
-    <ConnectButton.Custom>
-      {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
-        const ready = mounted
-        const connected = ready && account && chain
+    <>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={openNetworkModal}
+          className="bg-slate-700 border border-slate-600 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-sm flex items-center gap-1 transition-all duration-200"
+        >
+          {currentChain.name}
+        </button>
 
-        return (
-          <div
-            {...(!ready && {
-              "aria-hidden": true,
-              style: {
-                opacity: 0,
-                pointerEvents: "none",
-                userSelect: "none",
-              },
-            })}
-            className="connect-wallet-wrapper"
-          >
-            {(() => {
-              if (!connected) {
-                return (
-                  <button
-                    onClick={openConnectModal}
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-purple-500/20"
-                  >
-                    <Wallet className="h-5 w-5" />
-                    <span className="font-medium">Connect Wallet</span>
-                  </button>
-                )
-              }
+        <button
+          onClick={openAccountModal}
+          className="bg-slate-700 border border-slate-600 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-2 transition-all duration-200"
+        >
+          <div className="w-4 h-4 rounded-full bg-green-400 animate-pulse"></div>
+          <span>
+            {address?.slice(0, 6)}...{address?.slice(-4)}
+          </span>
+        </button>
+      </div>
 
-              return (
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={openChainModal}
-                    className="bg-slate-700 border border-slate-600 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-sm flex items-center gap-1 transition-all duration-200"
-                  >
-                    {chain.iconUrl && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 16,
-                          height: 16,
-                          borderRadius: 999,
-                          overflow: "hidden",
-                          marginRight: 4,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <img
-                          alt={chain.name}
-                          src={chain.iconUrl || "/placeholder.svg"}
-                          style={{ width: 12, height: 12 }}
-                        />
-                      </div>
-                    )}
-                    {chain.name}
-                  </button>
-
-                  <button
-                    onClick={openAccountModal}
-                    className="bg-slate-700 border border-slate-600 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-2 transition-all duration-200"
-                  >
-                    <div className="w-4 h-4 rounded-full bg-green-400 animate-pulse"></div>
-                    <span>{account.displayName}</span>
-                  </button>
-                </div>
-              )
-            })()}
-          </div>
-        )
-      }}
-    </ConnectButton.Custom>
+      <WalletConnectionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} view={modalView} />
+    </>
   )
 }

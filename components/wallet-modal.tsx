@@ -3,9 +3,30 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Copy, ExternalLink, LogOut } from "lucide-react"
-// Make sure the import path is correct
-import { useWallet, walletTypes, networks } from "@/contexts/wallet-context"
+import { useWallet } from "@/contexts/wallet-context"
 import { toast } from "@/components/ui/use-toast"
+
+// Define the networks array
+const networks = [
+  {
+    id: "ethereum",
+    name: "Ethereum",
+    icon: "/ethereum-logo.png",
+    iconBackground: "#627EEA",
+  },
+  {
+    id: "polygon",
+    name: "Polygon",
+    icon: "/polygon-matic-logo.png",
+    iconBackground: "#8247E5",
+  },
+  {
+    id: "arbitrum",
+    name: "Arbitrum",
+    icon: "/arbitrum-logo.png",
+    iconBackground: "#28A0F0",
+  },
+]
 
 export function WalletModal() {
   const { isModalOpen, setIsModalOpen, modalView, connect, disconnect, address, network, balance, switchNetwork } =
@@ -42,19 +63,36 @@ export function WalletModal() {
           <>
             <div className="text-xl font-bold mb-4">Connect a Wallet</div>
             <div className="grid gap-4 py-4">
-              {walletTypes.map((wallet) => (
-                <Button
-                  key={wallet.id}
-                  onClick={() => {
-                    connect(wallet.id)
-                    setIsModalOpen(false)
-                  }}
-                  className="flex justify-between items-center w-full bg-slate-700 hover:bg-slate-600"
-                >
-                  <span>{wallet.name}</span>
-                  <img src={wallet.icon || "/placeholder.svg"} alt={wallet.name} className="h-6 w-6" />
-                </Button>
-              ))}
+              <Button
+                onClick={() => {
+                  connect("injected")
+                  setIsModalOpen(false)
+                }}
+                className="flex justify-between items-center w-full bg-slate-700 hover:bg-slate-600"
+              >
+                <span>MetaMask</span>
+                <img src="/metamask-fox-logo.png" alt="MetaMask" className="h-6 w-6" />
+              </Button>
+              <Button
+                onClick={() => {
+                  connect("walletConnect")
+                  setIsModalOpen(false)
+                }}
+                className="flex justify-between items-center w-full bg-slate-700 hover:bg-slate-600"
+              >
+                <span>WalletConnect</span>
+                <img src="/walletconnect-icon.png" alt="WalletConnect" className="h-6 w-6" />
+              </Button>
+              <Button
+                onClick={() => {
+                  connect("coinbase")
+                  setIsModalOpen(false)
+                }}
+                className="flex justify-between items-center w-full bg-slate-700 hover:bg-slate-600"
+              >
+                <span>Coinbase Wallet</span>
+                <img src="/abstract-crypto-wallet.png" alt="Coinbase Wallet" className="h-6 w-6" />
+              </Button>
             </div>
           </>
         )}

@@ -4,12 +4,9 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
-import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit"
 import { WagmiProvider } from "wagmi"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { config } from "@/config/rainbow-kit"
-// Import CSS từ đường dẫn chính xác
-import "@rainbow-me/rainbowkit/dist/index.css"
+import { config } from "@/config/wagmi-config"
 
 const queryClient = new QueryClient()
 
@@ -18,7 +15,7 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Use client-side rendering for WalletConnect to avoid SSR issues
+  // Use client-side rendering for wallet connections to avoid SSR issues
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -30,21 +27,10 @@ export default function ClientLayout({
       {mounted ? (
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
-            <RainbowKitProvider
-              theme={darkTheme({
-                accentColor: "#a855f7",
-                accentColorForeground: "white",
-                borderRadius: "medium",
-                fontStack: "system",
-                overlayBlur: "small",
-              })}
-              modalSize="compact"
-            >
-              <ThemeProvider attribute="class" defaultTheme="dark">
-                {children}
-                <Toaster />
-              </ThemeProvider>
-            </RainbowKitProvider>
+            <ThemeProvider attribute="class" defaultTheme="dark">
+              {children}
+              <Toaster />
+            </ThemeProvider>
           </QueryClientProvider>
         </WagmiProvider>
       ) : (
