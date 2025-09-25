@@ -1,5 +1,5 @@
-import HomeClient from "./page-client"
+import ClientLayout from "./client-layout"
 
 export default function Home() {
-  return <HomeClient />
+  return <ClientLayout />
 }

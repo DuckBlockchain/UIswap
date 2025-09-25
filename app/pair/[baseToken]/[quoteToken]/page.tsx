@@ -26,7 +26,6 @@ function WalletWrapper({ children }: { children: React.ReactNode }) {
   "use client"
   // Import WalletProvider dynamically to avoid SSR issues
   const { WalletProvider } = require("@/contexts/wallet-context")
-
   return <WalletProvider>{children}</WalletProvider>
 }
 

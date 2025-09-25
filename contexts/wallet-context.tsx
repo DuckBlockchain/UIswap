@@ -10,29 +10,25 @@ export const networks = [
   {
     id: "ethereum",
     name: "Ethereum",
-    icon: "/ethereum-crystal.png",
-    iconBackground: "#627EEA",
+    icon: "https://www.citypng.com/public/uploads/preview/ethereum-eth-round-logo-icon-png-701751694969815akblwl2552.png",
     chainId: mainnet.id,
   },
   {
     id: "polygon",
     name: "Polygon",
-    icon: "/polygon-abstract-network.png",
-    iconBackground: "#8247E5",
+    icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyudckJZOkhk-RxzyKWJGdewhdzGU6bdSp8w&s",
     chainId: polygon.id,
   },
   {
     id: "optimism",
     name: "Optimism",
-    icon: "/optimistic-circuit.png",
-    iconBackground: "#FF0420",
+    icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqidBq62tBzMjwxpb9WljM3BuKe6oEHzbJ6Q&s",
     chainId: optimism.id,
   },
   {
     id: "arbitrum",
     name: "Arbitrum",
-    icon: "/arbitrum-network-abstract.png",
-    iconBackground: "#28A0F0",
+    icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6mQ1pwxVT3lqCTZWhuUZzKTOqT0ZmYh2oeg&s",
     chainId: arbitrum.id,
   },
 ]
