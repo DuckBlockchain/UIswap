@@ -1,6 +1,6 @@
 # UIswap
 
-UIswap is a modern decentralized exchange (DEX) interface for swapping tokens on Ethereum and other EVM-compatible blockchains. Built with Next.js and RainbowKit, UIswap provides a clean, intuitive user interface for token swapping, liquidity pool management, and portfolio tracking.
+UIswap is a modern decentralized exchange (DEX) interface for swapping tokens on Ethereum and other EVM-compatible blockchains. Built with Next.js and RainbowKit, UIswap provides a clean, intuitive user interface for token swapping.
 
 ## Features
 
@@ -93,8 +93,6 @@ uiswap/
 │   └── utils.ts
 ├── public/                 # Static assets (images and other assets)
 │   └── ...
-├── services/               # Service modules
-│   └── price-service.ts
 ├── next.config.mjs
 ├── package.json
 ├── tailwind.config.ts

@@ -20,7 +20,6 @@ const SwapInterface = dynamic(() => import("@/components/swap-interface"), {
   ),
 })
 
-
 const queryClient = new QueryClient()
 
 export default function ClientLayout() {

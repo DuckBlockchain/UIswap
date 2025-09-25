@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Wallet } from "lucide-react"
-import { useAccount, useChainId, useBalance } from "wagmi"
+import { useAccount, useChainId } from "wagmi"
 import { WalletConnectionModal } from "./wallet-connection-modal"
 import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains"
 
@@ -11,7 +11,6 @@ export function ConnectWalletButton() {
   const [mounted, setMounted] = useState(false)
   const { address, isConnected } = useAccount()
   const chainId = useChainId()
-
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalView, setModalView] = useState<"connect" | "account" | "network">("connect")
 

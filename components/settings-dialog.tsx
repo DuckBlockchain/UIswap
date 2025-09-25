@@ -18,7 +18,6 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const [deadline, setDeadline] = useState(20)
   const [expertMode, setExpertMode] = useState(false)
   const [multihops, setMultihops] = useState(true)
-
   const handleSlippageChange = (value: number[]) => {
     setSlippage(value[0])
   }

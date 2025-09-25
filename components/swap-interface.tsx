@@ -239,9 +239,9 @@ export default function SwapInterface({ initialBaseToken, initialQuoteToken }: S
                           ? "Insufficient balance"
                           : "Swap"}
                   </Button>
-
                 </div>
               </TabsContent>
+              
               <TabsContent value="limit" className="mt-4">
                 <div className="flex flex-col items-center justify-center py-8">
                   <Info className="h-12 w-12 text-slate-500 mb-4" />
