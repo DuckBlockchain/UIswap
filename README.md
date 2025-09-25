@@ -2,8 +2,6 @@
 
 UIswap is a modern decentralized exchange (DEX) interface for swapping tokens on Ethereum and other EVM-compatible blockchains. Built with Next.js and RainbowKit, UIswap provides a clean, intuitive user interface for token swapping, liquidity pool management, and portfolio tracking.
 
-![UIswap Interface](https://placeholder.svg?height=400&width=800&query=UIswap%20Interface)
-
 ## Features
 
 - **Token Swapping**: Easily swap between different tokens with a simple interface
@@ -18,7 +16,7 @@ UIswap is a modern decentralized exchange (DEX) interface for swapping tokens on
 
 - **Frontend**: Next.js 14 (App Router), React 18
 - **Styling**: Tailwind CSS, shadcn/ui components
-- **Wallet Connection**: RainbowKit, wagmi
+- **Wallet Connection**: wagmi
 - **State Management**: React Context API
 - **Data Fetching**: TanStack Query (React Query)
 - **Blockchain Interaction**: viem
@@ -63,50 +61,45 @@ UIswap is a modern decentralized exchange (DEX) interface for swapping tokens on
 
 ## Project Structure
 
-\`\`\`
+```
 uiswap/
-├── app/                    # Next.js App Router pages
-│   ├── layout.tsx          # Root layout component
-│   ├── page.tsx            # Home page
-│   ├── page-client.tsx     # Client-side home page component
-│   ├── client-layout.tsx   # Client-side layout with providers
-│   ├── metadata.ts         # App metadata
-│   ├── globals.css         # Global styles
-│   ├── rainbowkit.css      # RainbowKit custom styles
+├── app/                    # Next.js App Router and client-side layouts
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── client-layout.tsx
+│   ├── globals.css
 │   ├── pair/               # Token pair pages
-│   ├── portfolio/          # Portfolio page
 │   ├── pools/              # Liquidity pools page
 │   └── token/              # Token detail pages
 ├── components/             # React components
 │   ├── ui/                 # UI components (shadcn/ui)
-│   ├── navbar.tsx          # Navigation bar
-│   ├── footer.tsx          # Footer component
-│   ├── swap-interface.tsx  # Main swap interface
-│   ├── token-selector.tsx  # Token selection component
-│   ├── token-provider.tsx  # Token data provider
-│   ├── connect-wallet-button.tsx # Wallet connection button
-│   ├── settings-dialog.tsx # Settings dialog
-│   ├── recent-transactions.tsx # Recent transactions list
+│   ├── navbar.tsx
+│   ├── footer.tsx
+│   ├── swap-interface.tsx
+│   ├── token-selector.tsx
+│   ├── token-provider.tsx
+│   ├── connect-wallet-button.tsx
+│   ├── settings-dialog.tsx
 │   └── ...                 # Other components
 ├── config/                 # Configuration files
-│   └── rainbow-kit.ts      # RainbowKit configuration
+│   └── wagmi-config.ts
 ├── contexts/               # React context providers
-│   └── wallet-context.tsx  # Wallet context provider
+│   └── wallet-context.tsx
 ├── hooks/                  # Custom React hooks
-│   ├── use-wallet-info.ts  # Hook for wallet information
-│   └── use-wallet-connection.ts # Hook for wallet connection
+│   ├── use-wallet-info.ts
+│   ├── use-wallet-connection.ts
+│   └── use-mobile_del.tsx # Renamed from use-mobile.tsx
 ├── lib/                    # Utility functions
-│   └── utils.ts            # General utilities
-├── public/                 # Static assets
-│   ├── rainbowkit.css      # RainbowKit styles
-│   └── ...                 # Images and other assets
+│   └── utils.ts
+├── public/                 # Static assets (images and other assets)
+│   └── ...
 ├── services/               # Service modules
-│   └── price-service.ts    # Token price service
-├── next.config.mjs         # Next.js configuration
-├── package.json            # Project dependencies
-├── tailwind.config.ts      # Tailwind CSS configuration
-└── tsconfig.json           # TypeScript configuration
-\`\`\`
+│   └── price-service.ts
+├── next.config.mjs
+├── package.json
+├── tailwind.config.ts
+└── tsconfig.json
+```
 
 ## Key Components
 
@@ -121,19 +114,11 @@ The main swap interface allows users to exchange tokens. It includes:
 
 ### Wallet Connection
 
-UIswap uses RainbowKit for wallet connections, supporting:
+UIswap uses wagmi for wallet connections, with a custom WalletConnectionModal supporting:
 - MetaMask
 - Coinbase Wallet
 - WalletConnect
 - And many other popular wallets
-
-### Portfolio View
-
-The portfolio page displays:
-- Token balances
-- Token values
-- Price changes
-- Transaction history
 
 ### Liquidity Pools
 
@@ -255,8 +240,8 @@ UIswap is designed to be accessible to all users:
 - [ ] Add transaction history page
 - [ ] Implement dark/light mode toggle
 - [ ] Add ENS support
-- [ ] Implement network switching UI
-- [ ] Add wallet balance fetching
+- [x] Implement network switching UI
+- [x] Add wallet balance fetching
 - [ ] Create token approval flow
 - [ ] Add transaction signing
 - [ ] Implement limit orders
@@ -303,7 +288,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - [Next.js](https://nextjs.org/)
-- [RainbowKit](https://www.rainbowkit.com/)
 - [wagmi](https://wagmi.sh/)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
@@ -311,10 +295,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [TanStack Query](https://tanstack.com/query)
 
 
-## Contact
-
-For questions or support, please open an issue on the GitHub repository or contact us at support@uiswap.com.
-
 ---
 
-Made with ❤️ by the UIswap Team
+Made with ❤️ by the GMonchain Team
