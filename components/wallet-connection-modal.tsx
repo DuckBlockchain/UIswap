@@ -21,10 +21,10 @@ export function WalletConnectionModal({ isOpen, onClose, view }: WalletConnectio
   const { switchChain } = useSwitchChain()
 
   const networks = [
-    { ...mainnet, icon: "/ethereum-crystal.png", iconBackground: "#627EEA" },
-    { ...polygon, icon: "/polygon-abstract-network.png", iconBackground: "#8247E5" },
-    { ...optimism, icon: "/optimistic-circuit.png", iconBackground: "#FF0420" },
-    { ...arbitrum, icon: "/arbitrum-network-abstract.png", iconBackground: "#28A0F0" },
+    { ...mainnet, icon: "https://www.citypng.com/public/uploads/preview/ethereum-eth-round-logo-icon-png-701751694969815akblwl2552.png" },
+    { ...polygon, icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-UjZYpTKlVQWhKF3Sf3camP-rCTZ_OZnqcA&s" },
+    { ...optimism, icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqidBq62tBzMjwxpb9WljM3BuKe6oEHzbJ6Q&s" },
+    { ...arbitrum, icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6mQ1pwxVT3lqCTZWhuUZzKTOqT0ZmYh2oeg&s" },
   ]
 
   // Format address for display
@@ -80,9 +80,9 @@ export function WalletConnectionModal({ isOpen, onClose, view }: WalletConnectio
                   <img
                     src={
                       connector.name.toLowerCase().includes("metamask")
-                        ? "/metamask-fox-logo.png"
+                        ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ymr3UNKopfI0NmUY95Dr-0589vG-91KuAA&s"
                         : connector.name.toLowerCase().includes("coinbase")
-                          ? "/abstract-crypto-wallet.png"
+                          ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVGFrvFc94KMgF2467-SSZX5g0mZwOgwm_Rg&s"
                           : "/colorful-wallet-icon.png"
                     }
                     alt={connector.name}
@@ -168,7 +168,6 @@ export function WalletConnectionModal({ isOpen, onClose, view }: WalletConnectio
                   <div className="flex items-center">
                     <div
                       style={{
-                        background: network.iconBackground,
                         width: 24,
                         height: 24,
                         borderRadius: 999,
