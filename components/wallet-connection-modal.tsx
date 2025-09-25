@@ -83,7 +83,7 @@ export function WalletConnectionModal({ isOpen, onClose, view }: WalletConnectio
                         ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ymr3UNKopfI0NmUY95Dr-0589vG-91KuAA&s"
                         : connector.name.toLowerCase().includes("coinbase")
                           ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVGFrvFc94KMgF2467-SSZX5g0mZwOgwm_Rg&s"
-                          : "/colorful-wallet-icon.png"
+                          : "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
                     }
                     alt={connector.name}
                     className="h-6 w-6"
