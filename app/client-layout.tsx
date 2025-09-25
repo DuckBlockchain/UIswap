@@ -2,7 +2,6 @@
 
 import type React from "react"
 import { useState, useEffect, Suspense } from "react"
-import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { WagmiProvider } from "wagmi"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -21,10 +20,6 @@ const SwapInterface = dynamic(() => import("@/components/swap-interface"), {
   ),
 })
 
-const HomePageChart = dynamic(() => import("@/components/home-page-chart"), {
-  ssr: false,
-  loading: () => <div className="w-full h-[400px] bg-slate-800 border-slate-700 rounded-lg animate-pulse"></div>,
-})
 
 const queryClient = new QueryClient()
 
@@ -41,7 +36,6 @@ export default function ClientLayout() {
       {mounted ? (
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
-            <ThemeProvider attribute="class" defaultTheme="dark">
               <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-900 to-slate-800">
                 <Navbar />
                 <main className="flex-grow container mx-auto px-4 py-12">
@@ -62,16 +56,13 @@ export default function ClientLayout() {
                 <Footer />
               </div>
               <Toaster />
-            </ThemeProvider>
           </QueryClientProvider>
         </WagmiProvider>
       ) : (
         // Simple loading state while client-side code initializes
-        <ThemeProvider attribute="class" defaultTheme="dark">
           <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-900 to-slate-800">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
           </div>
-        </ThemeProvider>
       )}
     </>
   )

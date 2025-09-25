@@ -59,7 +59,6 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const { connect: wagmiConnect, connectors } = useConnect()
   const { disconnect: wagmiDisconnect } = useDisconnect()
   const { switchChain } = useSwitchChain()
-
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalView, setModalView] = useState<"connect" | "account" | "chain">("connect")
 

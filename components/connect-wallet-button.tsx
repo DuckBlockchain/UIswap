@@ -11,7 +11,6 @@ export function ConnectWalletButton() {
   const [mounted, setMounted] = useState(false)
   const { address, isConnected } = useAccount()
   const chainId = useChainId()
-  const { data: balanceData } = useBalance({ address })
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalView, setModalView] = useState<"connect" | "account" | "network">("connect")

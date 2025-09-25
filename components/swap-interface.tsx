@@ -5,14 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
-import { Settings, ArrowDownUp, Info, RefreshCw, Clock, ChevronDown, LineChart } from "lucide-react"
+import { Settings, ArrowDownUp, Info, RefreshCw, LineChart } from "lucide-react"
 import { TokenSelector } from "./token-selector"
 import { SettingsDialog } from "./settings-dialog"
 import { useTokenContext, type Token } from "./token-provider"
 import { useWalletInfo } from "@/hooks/use-wallet-info"
 import { useWalletConnection } from "@/hooks/use-wallet-connection"
 import { toast } from "./ui/use-toast"
-import { RecentTransactions } from "./recent-transactions"
 import Link from "next/link"
 
 interface SwapInterfaceProps {
@@ -30,7 +29,6 @@ export default function SwapInterface({ initialBaseToken, initialQuoteToken }: S
   const [fromAmount, setFromAmount] = useState("")
   const [toAmount, setToAmount] = useState("")
   const [exchangeRate, setExchangeRate] = useState(0)
-  const [isRecentTransactionsOpen, setIsRecentTransactionsOpen] = useState(false)
 
   // Update tokens if initialTokens change
   useEffect(() => {
@@ -44,7 +42,6 @@ export default function SwapInterface({ initialBaseToken, initialQuoteToken }: S
       // This would be replaced with actual price fetching in a real app
       const rate = (fromToken.price / toToken.price) * (0.9 + Math.random() * 0.2)
       setExchangeRate(rate)
-
       if (fromAmount && !isNaN(Number.parseFloat(fromAmount))) {
         setToAmount((Number.parseFloat(fromAmount) * rate).toFixed(6))
       }
@@ -243,22 +240,6 @@ export default function SwapInterface({ initialBaseToken, initialQuoteToken }: S
                           : "Swap"}
                   </Button>
 
-                  {/* Recent Transactions */}
-                  <Button
-                    variant="ghost"
-                    className="w-full flex justify-between items-center text-slate-400 hover:text-white"
-                    onClick={() => setIsRecentTransactionsOpen(!isRecentTransactionsOpen)}
-                  >
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-2" />
-                      <span>Recent Transactions</span>
-                    </div>
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform ${isRecentTransactionsOpen ? "rotate-180" : ""}`}
-                    />
-                  </Button>
-
-                  {isRecentTransactionsOpen && <RecentTransactions />}
                 </div>
               </TabsContent>
               <TabsContent value="limit" className="mt-4">
