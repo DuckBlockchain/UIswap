@@ -208,44 +208,6 @@ The application is optimized for performance:
 - Optimized images and assets
 - Server-side rendering where appropriate
 
-## Internationalization
-
-UIswap supports multiple languages:
-
-- English (default)
-- Spanish
-- French
-- German
-- Chinese
-- Japanese
-
-To change the language, use the language selector in the settings menu.
-
-## Accessibility
-
-UIswap is designed to be accessible to all users:
-
-- Semantic HTML
-- ARIA attributes
-- Keyboard navigation
-- Screen reader support
-- High contrast mode
-
-## Roadmap
-
-- [ ] Add support for more networks (Avalanche, Fantom, etc.)
-- [ ] Implement token approval flow
-- [ ] Add transaction history page
-- [ ] Implement dark/light mode toggle
-- [ ] Add ENS support
-- [x] Implement network switching UI
-- [x] Add wallet balance fetching
-- [ ] Create token approval flow
-- [ ] Add transaction signing
-- [ ] Implement limit orders
-- [ ] Add analytics dashboard
-- [ ] Create mobile app version
-
 ## Troubleshooting
 
 ### Common Issues
@@ -275,14 +237,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## Code of Conduct
-
-Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing to the project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - [Next.js](https://nextjs.org/)
@@ -291,7 +245,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Tailwind CSS](https://tailwindcss.com/)
 - [viem](https://viem.sh/)
 - [TanStack Query](https://tanstack.com/query)
-
 
 ---
 
