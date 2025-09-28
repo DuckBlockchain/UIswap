@@ -2,17 +2,10 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react"
 import { toast } from "@/components/ui/use-toast"
-import { useAccount, useChainId, useBalance, useConnect, useDisconnect, useSwitchChain } from "wagmi"
-import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains"
 
 // Define network types
 export const networks = [
-  {
-    id: "ethereum",
-    name: "Ethereum",
-    icon: "https://www.citypng.com/public/uploads/preview/ethereum-eth-round-logo-icon-png-701751694969815akblwl2552.png",
-    chainId: mainnet.id,
-  },
+
   {
     id: "polygon",
     name: "Polygon",
